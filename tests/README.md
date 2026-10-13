@@ -19,7 +19,7 @@ node run-tests-persist.mjs    # 台账持久化专项（28 项）
 
 ## 原理
 
-用 jsdom 在无头环境**真实加载 `../index.html`**（`runScripts:'dangerously'` + `resources:'usable'`，file:// URL 指向 index.html），四个 `<script>`（app.js / chart.js / tools.js / ai.js）会真正执行，然后直接调用页面里的函数（`switchExp` / `loadSample` / `recompute` / `importText` / `toolTab` / `openAI` …）。
+用 jsdom 在无头环境**真实加载 `../index.html`**（`runScripts:'dangerously'` + `resources:'usable'`，file:// URL 指向 index.html），四个 `<script>`（app.js / chart.js / tools.js / ai.js）会真正执行，然后直接调用页面里的函数（`switchExp` / `loadSample` / `recompute` / `importText` / `toolTab` / `openAiPanel` …）。
 canvas 的 `getContext` 换成假对象（jsdom 没有 canvas 实现）。
 
 所以它验证的是**页面真的能算出这个数**，而不是代码看起来对。
@@ -58,7 +58,7 @@ canvas 的 `getContext` 换成假对象（jsdom 没有 canvas 实现）。
 | C2 | 伏安法导入 3 列数据 `1.00,0.0201,99`（该实验只要 2 列） | `#impMsg` 含「第1行」；表格行数仍为 6（未导入） |
 | C3 | 单摆第 1 行摆长填 `abc` | 校验区含「非数值」；结果区不出现数字结果 |
 | C4 | 单摆载入示例后把第 3 行周期改成 1.9 | 该 `<tr>` 带 class `outlier-row`；结果区含「疑似异常」；结果区仍含「平均」（数据未被删除） |
-| C5 | `window.fetch` 替换为必定失败 → 调 `openAI()` | `#aiStatus` 含「代理未启动」 |
+| C5 | `window.fetch` 替换为必定失败 → 调 `openAiPanel()` | `#aiStatus` 含「代理未启动」 |
 | C6 | 单摆载入示例后填 uB = `abc` | 校验区含「uB 必须是非负的有限数字」；结果区含「uB 输入无效，已暂停生成最终结果」，且无「±」 |
 
 ### D 组：工具简查（4 个）
