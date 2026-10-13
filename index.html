@@ -243,7 +243,7 @@ footer{text-align:center;color:#bfbfbf;font-size:12px;margin-top:18px;padding:10
   </div>
 </div>
 
-<!-- C AI 助手面板（默认隐藏，openAI/closeAI 控制显隐） -->
+<!-- C AI 助手面板（默认隐藏，openAiPanel/closeAiPanel 控制显隐） -->
 <div id=ai>
   <div class=aicard>
     <h3>🤖 AI 助手</h3>
@@ -278,7 +278,7 @@ footer{text-align:center;color:#bfbfbf;font-size:12px;margin-top:18px;padding:10
     <textarea id=aiInput class=aiinput rows=4></textarea>
     <div class=aibtns>
       <button id=aiSendBtn class="btn btn-pri" onclick=aiSend()>发送给 Agnes</button>
-      <button class=btn onclick=closeAI()>关闭</button>
+      <button class=btn onclick=closeAiPanel()>关闭</button>
     </div>
     <div id=aiOut class=aiout></div>
     </div>
@@ -295,7 +295,7 @@ footer{text-align:center;color:#bfbfbf;font-size:12px;margin-top:18px;padding:10
   <div class=topbar-right>
     <button class=btn onclick=startHome()>← 首页</button>
     <button class=btn onclick=openTools()>🧰 工具箱</button>
-    <button class=btn onclick=openAI()>🤖 AI 助手</button>
+    <button class=btn onclick=openAiPanel()>🤖 AI 助手</button>
     <span class=divider></span>
     <label>选择实验</label>
     <select id=expSelect onchange=switchExp(this.value)>
