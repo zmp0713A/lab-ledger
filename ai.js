@@ -12,7 +12,7 @@ var aiPlacements={
 
 // 打开面板并探测代理（连不上会自动重试：代理晚几秒起来也能自己连上）
 var aiPingTimer=null, aiPingTry=0;
-function openAI(){
+function openAiPanel(){
   var panel=document.getElementById('ai');
   if(panel) panel.style.display='flex';
   aiTask(aiCurTask);
@@ -50,7 +50,7 @@ function aiPing(){
 }
 
 // 关闭面板（同时停止重试）
-function closeAI(){
+function closeAiPanel(){
   if(aiPingTimer){ clearTimeout(aiPingTimer); aiPingTimer=null; }
   var panel=document.getElementById('ai');
   if(panel) panel.style.display='none';
