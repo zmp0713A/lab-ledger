@@ -2,7 +2,10 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { JSDOM } = require('jsdom');
-const dir = 'C:/Users/2007/Documents/deepseek-harness/default-workspace/lab-data-assistant/';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+// 按测试文件自身定位项目目录（可移植；不依赖任何绝对路径）
+const dir = path.dirname(path.dirname(fileURLToPath(import.meta.url))).replace(/\\/g, '/') + '/';
 const html = fs.readFileSync(dir + 'index.html', 'utf8');
 const noop = () => {};
 const fakeCtx = () => new Proxy({}, { get: (t, p) => (p in t ? t[p] : noop), set: (t, p, v) => { t[p] = v; return true; } });
@@ -92,14 +95,14 @@ check('样式含打印时只显示报告', /@media print/.test(html) && /body>\*
 check('hintbox 拼写已修', !/[;{]ont-size/.test(html));
 
 console.log('\n=== 6) 环境自检行（离线时明确说不可用） ===');
-w.openAI();
+w.openAiPanel();
 await new Promise((r) => setTimeout(r, 700));
 const env = txt($('aiEnv'));
 check('离线时环境自检行显示不可用', /环境自检不可用|本机环境/.test(env), env);
 
 console.log('\n=== 8) AI 面板优化：任务提示 / 记忆 / 复制 / 等待计时 ===');
 w.__aiMode('canned', { ok: true, text: '这是草稿文本：g = 9.80 m/s²。' });
-w.openAI();
+w.openAiPanel();
 await new Promise((r) => setTimeout(r, 300));
 // 任务提示行
 w.aiTask('ask');
