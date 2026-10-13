@@ -644,5 +644,5 @@ document.addEventListener('keydown',function(e){
   if(e.key!=='Escape') return;
   var vis=function(id){ var el=document.getElementById(id); return el && getComputedStyle(el).display!=='none'; };
   if(vis('tools')){ closeTools(); return; }
-  if(vis('ai'))   { closeAI();   return; }
+  if(vis('ai'))   { closeAiPanel();   return; }
 });
