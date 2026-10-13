@@ -2,7 +2,10 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { JSDOM } = require('jsdom');
-const dir = 'C:/Users/2007/Documents/deepseek-harness/default-workspace/lab-data-assistant/';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+// 按测试文件自身定位项目目录（可移植；不依赖任何绝对路径）
+const dir = path.dirname(path.dirname(fileURLToPath(import.meta.url))).replace(/\\/g, '/') + '/';
 const html = fs.readFileSync(dir + 'index.html', 'utf8');
 const noop = () => {};
 const fakeCtx = () => new Proxy({}, { get: (t, p) => (p in t ? t[p] : noop), set: (t, p, v) => { t[p] = v; return true; } });
@@ -93,7 +96,7 @@ d.querySelector('#toolBody button').dispatchEvent(new w.Event('click', { bubbles
 check('拟合报出非法输入', /不是合法数字/.test(txt($('fitRes'))), txt($('fitRes')).slice(0, 70));
 
 console.log('\n=== 8) AI 面板：标签高亮 + 未启动提示 ===');
-w.openAI();
+w.openAiPanel();
 w.aiTask('ask');
 const active = [...d.querySelectorAll('.aitab')].filter((b) => /active/.test(b.className));
 check('切换任务后有且仅有 1 个标签高亮', active.length === 1, 'active=' + active.length);
