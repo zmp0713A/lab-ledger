@@ -1,0 +1,17 @@
+﻿# 依赖与缓存
+node_modules/
+.pnpm-store/
+*.log
+
+# 本机配置与运行产物（含本机路径，不入库）
+ai-config.json
+ai-log.jsonl
+ai-proxy-watchdog.log
+autostart-check.log
+
+# 编辑器与系统文件
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*.tmp
