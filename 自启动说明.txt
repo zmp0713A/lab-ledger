@@ -1,0 +1,11 @@
+AI 助手开机自启动（可选，约 30 秒，做一次）
+
+1. 按 Win + R，输入 shell:startup 回车，会打开一个「启动」文件夹
+2. 在桌面或任意位置：右键 - 新建 - 快捷方式
+   目标填：powershell.exe
+   参数填：-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File 后跟本目录 ai-proxy-watchdog.ps1 的完整路径
+3. 把这个快捷方式放进第 1 步打开的「启动」文件夹
+4. 下次登录 Windows 就会自动启动 AI 代理；代理如果挂了，守护脚本会在约 30 秒内自动重启
+
+运行日志：ai-proxy-watchdog.log
+不想自启动了：删掉「启动」文件夹里那个快捷方式即可。
