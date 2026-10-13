@@ -74,7 +74,7 @@ await new Promise(r => setTimeout(r, 200));
 const cv = doc.getElementById('chart');
 if (cv) cv.getContext = () => makeFakeCtx(cv);
 
-// 让 openAI 里的 AbortController / fetch 可用（jsdom window 没有）
+// 让 openAiPanel 里的 AbortController / fetch 可用（jsdom window 没有）
 w.AbortController = w.AbortController || globalThis.AbortController;
 
 const $id = (id) => doc.getElementById(id);
@@ -206,10 +206,10 @@ contains('C4 异常值不删数据 仍有平均', resText(), '平均');
 
 // C5：AI 面板 —— fetch 必定失败 → 代理未启动
 w.fetch = () => Promise.reject(new Error('no proxy'));
-w.openAI();
+w.openAiPanel();
 await new Promise(r => setTimeout(r, 100));
 contains('C5 fetch失败 显示代理未启动', $id('aiStatus').textContent, '代理未启动');
-w.closeAI();
+w.closeAiPanel();
 
 // C6：uB 输入非法 → 校验区报错 + 结果区锁定，不出数字
 w.switchExp(0);
